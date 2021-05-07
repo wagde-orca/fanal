@@ -33,6 +33,7 @@ const (
 	TypeYarn
 	TypeGoBinary
 	TypeGoMod
+	TypePom
 
 	// Image Config
 	TypeApkCommand

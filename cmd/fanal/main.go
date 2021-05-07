@@ -25,6 +25,7 @@ import (
 	_ "github.com/aquasecurity/fanal/analyzer/library/nuget"
 	_ "github.com/aquasecurity/fanal/analyzer/library/pipenv"
 	_ "github.com/aquasecurity/fanal/analyzer/library/poetry"
+	_ "github.com/aquasecurity/fanal/analyzer/library/pom"
 	_ "github.com/aquasecurity/fanal/analyzer/library/yarn"
 	_ "github.com/aquasecurity/fanal/analyzer/os/alpine"
 	_ "github.com/aquasecurity/fanal/analyzer/os/amazonlinux"

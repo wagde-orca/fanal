@@ -12,6 +12,7 @@ const (
 	Jar      = "jar"
 	GoBinary = "gobinary"
 	GoMod    = "gomod"
+	Pom      = "pom"
 )
 
 var (

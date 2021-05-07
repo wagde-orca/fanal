@@ -31,6 +31,9 @@ type Artifact struct {
 }
 
 func NewArtifact(img image.Image, c cache.ArtifactCache, disabled []analyzer.Type) artifact.Artifact {
+	// POM doesn't need to be analyzed in image scan.
+	disabled = append(disabled, analyzer.TypePom)
+
 	return Artifact{
 		image:    img,
 		cache:    c,

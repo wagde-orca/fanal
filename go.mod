@@ -7,7 +7,7 @@ require (
 	github.com/Microsoft/go-winio v0.4.16 // indirect
 	github.com/Microsoft/hcsshim v0.8.14 // indirect
 	github.com/alicebob/miniredis/v2 v2.14.1
-	github.com/aquasecurity/go-dep-parser v0.0.0-20210427143403-3c97ccc53976
+	github.com/aquasecurity/go-dep-parser v0.0.0-20210507083846-69ae9d658bd4
 	github.com/aquasecurity/testdocker v0.0.0-20210106133225-0b17fe083674
 	github.com/aws/aws-sdk-go v1.31.6
 	github.com/containerd/cgroups v0.0.0-20210114181951-8a68de567b68 // indirect
@@ -21,7 +21,7 @@ require (
 	github.com/go-redis/redis/v8 v8.4.0
 	github.com/gogo/protobuf v1.3.2 // indirect
 	github.com/google/go-containerregistry v0.1.2
-	github.com/hashicorp/go-multierror v1.1.0
+	github.com/hashicorp/go-multierror v1.1.1
 	github.com/knqyf263/go-apk-version v0.0.0-20200609155635-041fdbb8563f
 	github.com/knqyf263/go-deb-version v0.0.0-20190517075300-09fca494f03d
 	github.com/knqyf263/go-rpmdb v0.0.0-20201215100354-a9e3110d8ee1
@@ -39,9 +39,7 @@ require (
 	github.com/urfave/cli/v2 v2.2.0
 	go.etcd.io/bbolt v1.3.5
 	go.opencensus.io v0.22.6 // indirect
-	golang.org/x/net v0.0.0-20210220033124-5f55cee0dc0d // indirect
 	golang.org/x/sync v0.0.0-20210220032951-036812b2e83c
-	golang.org/x/sys v0.0.0-20210220050731-9a76102bfb43 // indirect
 	golang.org/x/xerrors v0.0.0-20200804184101-5ec99f83aff1
 	google.golang.org/genproto v0.0.0-20210219173056-d891e3cb3b5b // indirect
 	google.golang.org/grpc v1.35.0 // indirect
