@@ -17,17 +17,17 @@ type Layer struct {
 }
 
 type Package struct {
-	Name            string `json:",omitempty"`
-	Version         string `json:",omitempty"`
-	Release         string `json:",omitempty"`
-	Epoch           int    `json:",omitempty"`
-	Arch            string `json:",omitempty"`
-	SrcName         string `json:",omitempty"`
-	SrcVersion      string `json:",omitempty"`
-	SrcRelease      string `json:",omitempty"`
-	SrcEpoch        int    `json:",omitempty"`
-	Modularitylabel string `json:",omitempty"`
-	Layer           Layer  `json:",omitempty"`
+	Name            string `json:",omitempty" schema:"-"`
+	Version         string `json:",omitempty" schema:"-"`
+	Release         string `json:",omitempty" schema:"release,omitempty"`
+	Epoch           int    `json:",omitempty" schema:"epoch,omitempty"`
+	Arch            string `json:",omitempty" schema:"arch,omitempty"`
+	SrcName         string `json:",omitempty" schema:"src_name,omitempty"`
+	SrcVersion      string `json:",omitempty" schema:"src_version,omitempty"`
+	SrcRelease      string `json:",omitempty" schema:"src_release,omitempty"`
+	SrcEpoch        int    `json:",omitempty" schema:"src_epoch,omitempty"`
+	Modularitylabel string `json:",omitempty" schema:"modularity_label,omitempty"`
+	Layer           Layer  `json:",omitempty" schema:"-"`
 }
 
 type SrcPackage struct {
