@@ -10,6 +10,7 @@ import (
 
 	"github.com/aquasecurity/fanal/analyzer"
 	"github.com/aquasecurity/fanal/analyzer/library"
+	"github.com/aquasecurity/fanal/log"
 	"github.com/aquasecurity/fanal/types"
 	"github.com/aquasecurity/go-dep-parser/pkg/jar"
 )
@@ -27,11 +28,13 @@ type javaLibraryAnalyzer struct{}
 
 func (a javaLibraryAnalyzer) Analyze(target analyzer.AnalysisTarget) (*analyzer.AnalysisResult, error) {
 	r := bytes.NewReader(target.Content)
+	log.Logger.Debugf("WAGDE Analyze %s", target.FilePath)
 	libs, err := jar.Parse(r, jar.WithFilePath(target.FilePath))
 	if err != nil {
+		// WAGDE
 		return nil, xerrors.Errorf("jar/war/ear parse error: %w", err)
 	}
-
+	// log.Logger.Debugf("Parsied Java artifact %s... %v", target.FilePath, libs)
 	return library.ToAnalysisResult(types.Jar, target.FilePath, libs), nil
 }
 

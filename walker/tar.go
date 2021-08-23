@@ -46,7 +46,7 @@ func WalkLayerTar(layer io.Reader, analyzeFn WalkFunc) ([]string, []string, erro
 			continue
 		}
 
-		if isIgnored(filePath) {
+		if isIgnored(filePath, nil) {
 			continue
 		}
 

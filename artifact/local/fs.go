@@ -21,6 +21,7 @@ import (
 	"github.com/aquasecurity/fanal/artifact"
 	"github.com/aquasecurity/fanal/cache"
 	"github.com/aquasecurity/fanal/config/scanner"
+	"github.com/aquasecurity/fanal/log"
 	"github.com/aquasecurity/fanal/types"
 	"github.com/aquasecurity/fanal/walker"
 )
@@ -63,10 +64,13 @@ func (a Artifact) Inspect(ctx context.Context) (types.ArtifactReference, error) 
 	limit := semaphore.NewWeighted(parallel)
 
 	err := walker.WalkDir(a.dir, func(filePath string, info os.FileInfo, opener analyzer.Opener) error {
-		filePath, err := filepath.Rel(a.dir, filePath)
+		log.Logger.Debugf("Inspect 1 for %s %s", a.dir, filePath)
+		filePathXXX, err := filepath.Rel(a.dir, filePath)
+		log.Logger.Debugf("Inspect 2 for %s %s %s", a.dir, filePath, filePathXXX)
 		if err != nil {
 			return xerrors.Errorf("filepath rel (%s): %w", filePath, err)
 		}
+		// WAGDE
 		if err = a.analyzer.AnalyzeFile(ctx, &wg, limit, result, filePath, info, opener); err != nil {
 			return xerrors.Errorf("analyze file (%s): %w", filePath, err)
 		}

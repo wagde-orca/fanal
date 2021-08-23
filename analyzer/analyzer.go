@@ -185,6 +185,7 @@ func (a Analyzer) AnalyzeFile(ctx context.Context, wg *sync.WaitGroup, limit *se
 	if info.IsDir() {
 		return nil
 	}
+	log.Logger.Debugf("AnalyzeFile WAGDE for %s", filePath)
 	for _, d := range a.drivers {
 		// filepath extracted from tar file doesn't have the prefix "/"
 		if !d.Required(strings.TrimLeft(filePath, "/"), info) {
@@ -206,7 +207,8 @@ func (a Analyzer) AnalyzeFile(ctx context.Context, wg *sync.WaitGroup, limit *se
 
 			ret, err := a.Analyze(target)
 			if err != nil && !xerrors.Is(err, aos.AnalyzeOSError) {
-				log.Logger.Debugf("Analysis error: %s", err)
+				// WAGDE
+				log.Logger.Debugf("Analysis error for %s: %s", filePath, err)
 				return
 			}
 			result.Merge(ret)

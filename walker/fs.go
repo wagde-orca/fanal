@@ -6,6 +6,7 @@ import (
 	"path/filepath"
 	"sync"
 
+	"github.com/aquasecurity/fanal/log"
 	"github.com/saracen/walker"
 
 	"golang.org/x/xerrors"
@@ -16,12 +17,27 @@ import (
 func WalkDir(root string, f WalkFunc) error {
 	// walk function called for every path found
 	walkFn := func(pathname string, fi os.FileInfo) error {
+		log.Logger.Debugf("WalkDir: walking 1 %s %d %t %t", pathname, fi.Size(), fi.Mode().IsRegular(), fi.Mode()&os.ModeSymlink != 0)
+		if fi.Mode()&os.ModeSymlink != 0 {
+			pathname, _ = os.Readlink(pathname)
+			log.Logger.Debugf("WalkDir: walking 2 %s %d %t %t", pathname, fi.Size(), fi.Mode().IsRegular(), fi.Mode()&os.ModeSymlink != 0)
+			pathname, _ = filepath.Abs(pathname)
+			log.Logger.Debugf("WalkDir: walking 3 %s %d %t %t", pathname, fi.Size(), fi.Mode().IsRegular(), fi.Mode()&os.ModeSymlink != 0)
+			file_fi, err := os.Lstat(pathname)
+			if err != nil {
+				return nil
+			}
+			// log.Logger.Debugf("WalkDir: resolved link %s %d %b", pathname, fi.Size(), fi.Mode().IsRegular(), fi.Mode()&os.ModeSymlink != 0)
+			fi = file_fi
+		}
 		if !fi.Mode().IsRegular() {
 			return nil
-		} else if isIgnored(pathname) {
+		} else if isIgnored(pathname, fi) {
 			return filepath.SkipDir
 		}
+		// log.Logger.Debugf("WalkDir: Walking 5 %s %s %s", root, pathname, filepath.Clean(pathname))
 		pathname = filepath.Clean(pathname)
+
 		if err := f(pathname, fi, fileOnceOpener(pathname)); err != nil {
 			return xerrors.Errorf("failed to analyze file: %w", err)
 		}
